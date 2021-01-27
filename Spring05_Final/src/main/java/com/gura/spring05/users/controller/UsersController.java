@@ -1,5 +1,11 @@
 package com.gura.spring05.users.controller;
 
+import java.net.URLEncoder;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -8,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gura.spring05.users.dao.UsersDao;
 import com.gura.spring05.users.dto.UsersDto;
 import com.gura.spring05.users.service.UsersService;
 
@@ -16,6 +23,27 @@ public class UsersController {
 	
 	@Autowired
 	private UsersService service;
+	
+	@RequestMapping(value = "/users/login" , method = RequestMethod.POST)
+	public String login(HttpServletRequest request,HttpServletResponse response) {
+		//로그인에 관련된 로직을 서비스를 통해서 처리한다
+		service.loginLogic(request, response);
+		//view page 로 forward 이동해서 응답
+		return "users/login";
+		
+	}
+	
+	//로그인 폼 요청 처리
+	@RequestMapping("/users/loginform")
+	public ModelAndView loginform(HttpServletRequest request, 
+			ModelAndView mView) {
+		//로그인 폼에 관련된 로직을 서비스를 통해서 처리한다.
+		service.loginformLogic(request, mView);
+		//view page 정보도 담는다.
+		mView.setViewName("users/loginform");
+		//리턴
+		return mView;
+	}
 	
 	//회원 가입 요청처리
 	//form 전송은 보통 post 방식 요청인데 post 방식 요청만 받아들이도록 
@@ -52,3 +80,5 @@ public class UsersController {
 		return mView;
 	}
 }
+
+
