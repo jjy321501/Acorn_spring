@@ -1,10 +1,8 @@
 package com.gura.spring05.users.controller;
 
-import java.net.URLEncoder;
-
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gura.spring05.users.dao.UsersDao;
 import com.gura.spring05.users.dto.UsersDto;
 import com.gura.spring05.users.service.UsersService;
 
@@ -24,13 +21,42 @@ public class UsersController {
 	@Autowired
 	private UsersService service;
 	
-	@RequestMapping(value = "/users/login" , method = RequestMethod.POST)
-	public String login(HttpServletRequest request,HttpServletResponse response) {
-		//로그인에 관련된 로직을 서비스를 통해서 처리한다
-		service.loginLogic(request, response);
-		//view page 로 forward 이동해서 응답
-		return "users/login";
+	//개인정보 삭제 요청처리
+	@RequestMapping("/users/private/delete")
+	public String delete(HttpSession session) {
 		
+		service.deleteUser(session);
+		
+		return "users/private/delete";
+	}
+	
+	//개인정보 보기 요청처리
+	@RequestMapping("/users/private/info")
+	public ModelAndView info(ModelAndView mView, HttpSession session) {
+		
+		service.getInfo(mView, session);
+		
+		mView.setViewName("users/private/info");
+		return mView;
+	}
+	
+	//로그 아웃 요청 처리
+	@RequestMapping("/users/logout")
+	public String logout(HttpSession session) {
+		// session.invalidate(); //세션 초기화 
+		session.removeAttribute("id"); //세션에서 id 삭제
+		
+		return "users/logout";
+	}
+	
+	//로그인 요청 처리
+	@RequestMapping(value = "/users/login", method = RequestMethod.POST)
+	public String login(HttpServletRequest request,
+			HttpServletResponse response) {
+		//로그인에 관련된 로직을 서비스를 통해서 처리한다.
+		service.loginLogic(request, response);
+		//view page  로 forward  이동해서 응답
+		return "users/login";
 	}
 	
 	//로그인 폼 요청 처리
@@ -80,5 +106,4 @@ public class UsersController {
 		return mView;
 	}
 }
-
 
