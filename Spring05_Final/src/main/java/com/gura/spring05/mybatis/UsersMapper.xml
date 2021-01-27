@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gura.spring05.mybatis.UsersMapper">
+<mapper namespace="users">
 	<update id="updateProfile" parameterType="usersDto">
 		UPDATE users
 		SET profile=#{profile}
@@ -16,29 +16,30 @@
 		SET email=#{email}
 		WHERE id=#{id}
 	</update>
-	<delete id="delete" parameterType="String">
+	<delete id="delete" parameterType="java.lang.String">
 		DELETE FROM users
 		WHERE id=#{id}
 	</delete>
 	<select id="getData" parameterType="String" resultType="usersDto">
-		SELECT pwd,email,profile,regdate
+		SELECT pwd,email,profile,
+			TO_CHAR(regdate, 'YY.MM.DD HH24:MI') AS regdate
 		FROM users
 		WHERE id=#{id}
 	</select>
 	<insert id="insert" parameterType="usersDto">
 		INSERT INTO users
-		(id,pwd,email,regdate)
-		VALUES(#{id},#{pwd},#{email},SYSDATE)
+		(id, pwd, email, regdate)
+		VALUES(#{id}, #{pwd}, #{email}, SYSDATE)
 	</insert>
 	<select id="isExist" parameterType="String" resultType="usersDto">
 		SELECT *
 		FROM users
-		WHERE id=#{id} 
+		WHERE id=#{id}
 	</select>
-	<select id="isValid" parameterType="UsersDto" resultType="String">
+	<select id="isValid" parameterType="usersDto" resultType="String">
 		SELECT id
 		FROM users
 		WHERE id=#{id} AND pwd=#{pwd}
 	</select>
-	
 </mapper>
+
