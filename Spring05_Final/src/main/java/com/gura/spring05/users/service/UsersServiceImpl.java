@@ -128,12 +128,33 @@ public class UsersServiceImpl implements UsersService{
 
 	@Override
 	public void deleteUser(HttpSession session) {
-		//로그인된 아이디를 읽어온다
+		//로그인된 아이디를 읽어온다. 
 		String id=(String)session.getAttribute("id");
-		//DB에서 삭제
+		//DB 에서 삭제
 		dao.delete(id);
 		//로그아웃 처리
 		session.removeAttribute("id");
 	}
+
+	@Override
+	public void updateUserPwd(ModelAndView mView, UsersDto dto,
+			HttpSession session) {
+		//로그인 된 아이디를 읽어와서 
+		String id=(String)session.getAttribute("id");
+		//UsersDto 에 담고
+		dto.setId(id);
+		//비밀번호를 수정하고 성공 여부를 리턴 받는다.
+		boolean isSuccess=dao.updatePwd(dto);
+		//만일 성공이면 
+		if(isSuccess) {
+			//비밀번호가 수정되었으므로 다시 로그인 하도록 로그인 아웃 처리를 한다.
+			session.removeAttribute("id");
+		}
+		//성공 여부를 ModelAndView 객체에 담는다.
+		mView.addObject("isSuccess", isSuccess);
+		
+	}
 }
+
+
 
