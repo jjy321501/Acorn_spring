@@ -13,6 +13,9 @@
 	<ul>
 		<li><a href="member/list.do">회원 목록보기</a></li>
 		<li><a href="json01.do">json테스트1</a></li>
+		<li><a href="json02.do">json테스트2</a></li>
+		<li><a href="json03.do">json테스트3</a></li>
+		<li><a href="json04.do">json테스트4</a></li>
 	</ul>
 	<h2>파일 업로드 테스트</h2>
 	<form action="upload.do" method="post" enctype="multipart/form-data">
