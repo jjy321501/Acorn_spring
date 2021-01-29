@@ -21,13 +21,13 @@ public class CafeDaoImpl implements CafeDao{
 
 	@Override
 	public void update(CafeDto dto) {
-		// TODO Auto-generated method stub
+		session.update("cafe.update",dto);
 		
 	}
 
 	@Override
 	public void delete(int num) {
-		// TODO Auto-generated method stub
+		session.delete("cafe.delete",num);
 		
 	}
 
