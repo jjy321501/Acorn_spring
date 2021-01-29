@@ -26,10 +26,13 @@ public class UsersController {
 	
 	@Autowired
 	private UsersService service;
-	//개인 정보 수정처리
-	@RequestMapping(value = "/users/private/update", method = RequestMethod.POST)
-	public ModelAndView update(UsersDto dto, HttpSession session, ModelAndView mView) {
-		
+	
+	//개인 정보 수정 요청 처리
+	@RequestMapping(value = "/users/private/update", 
+			method = RequestMethod.POST)
+	public ModelAndView update(UsersDto dto, HttpSession session,
+			ModelAndView mView) {
+		service.updateUser(dto, session);
 		mView.setViewName("users/private/update");
 		return mView;
 	}
@@ -147,9 +150,15 @@ public class UsersController {
 		 */
 		//서비스를 이용해서 해당 아이디가 존재하는지 여부를 알아낸다.
 		boolean isExist=service.isExistId(inputId);
+		// {"isExist":true} or {"isExist":false} 를 응답하기 위한 Map 구성
 		Map<String, Object> map=new HashMap<String, Object>();
-		map.put("isExist",isExist);
+		map.put("isExist", isExist);
 		return map;
 	}
 }
+
+
+
+
+
 

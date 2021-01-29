@@ -53,6 +53,7 @@
 	//[이메일을 검증할 정규 표현식] (정확히 검증하려면 javascript 이메일 정규 표현식 검색해서 사용!)
 	//@ 가 포함되어 있는지 검증 
 	let reg_email=/@/; 
+
 	//아이디 유효성 여부를 관리할 변수 만들고 초기값 부여하기
 	let isIdValid=false;
 	//비밀번호 유효성 여부를 관리할 변수 만들고 초기값 부여하기
@@ -62,6 +63,7 @@
 	//폼 전체의 유효성 여부를 관리할 변수 만들고 초기값 부여하기
 	let isFormValid=false;
 	
+
 	//폼에 submit 이벤트가 일어 났을때 jquery 를 활용해서 폼에 입력한 내용 검증하기
 	// id 가 myForm 인 요소에 submit 이벤트가 일어 났을때 실행할 함수 등록 
 	$("#myForm").on("submit", function(){
@@ -166,3 +168,13 @@
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+

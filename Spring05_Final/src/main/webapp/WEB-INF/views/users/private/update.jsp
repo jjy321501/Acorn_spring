@@ -8,9 +8,12 @@
 </head>
 <body>
 <script>
-	alert("수정했습니다");
+	alert("수정 했습니다.");
 	location.href="${pageContext.request.contextPath }/users/private/info.do";
 </script>	
 </body>
 </html>
+
+
+
 

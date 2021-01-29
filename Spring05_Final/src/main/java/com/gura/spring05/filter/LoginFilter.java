@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 // web.xml 필터 설정 대신에 annotation 을 활용해서 필터를 동작하게 할수도 있다.
-@WebFilter(urlPatterns = {"/users/private/*","/cafe/private/*","/file/private/*","/gallery/private/*"})
+@WebFilter(urlPatterns = {"/gallery/private/*","/users/private/*","/cafe/private/*","/file/private/*"})
 public class LoginFilter implements Filter{
 
 	@Override
@@ -64,7 +64,7 @@ public class LoginFilter implements Filter{
 			// ServletResponse type 을 HttpServletResponse type 으로 casting
 			HttpServletResponse res=(HttpServletResponse)response;
 			//리다일렉트 시킬때 원래 목적지 정보를 url 라는 파라미터 명으로 같이 보낸다.
-			res.sendRedirect(cPath+"/users/loginform.jsp?url="+encodedUrl);
+			res.sendRedirect(cPath+"/users/loginform.do?url="+encodedUrl);
 		}	
 	}
 

@@ -9,8 +9,7 @@ public class CafeDto {
 	private String regdate;
 	private int startRowNum;
 	private int endRowNum;
-	
-	//디폴트 생성자
+	//디폴트 생성자 
 	public CafeDto() {}
 	public CafeDto(int num, String writer, String title, String content, int viewCount, String regdate, int startRowNum,
 			int endRowNum) {
@@ -74,3 +73,8 @@ public class CafeDto {
 	}
 	
 }
+
+
+
+
+
