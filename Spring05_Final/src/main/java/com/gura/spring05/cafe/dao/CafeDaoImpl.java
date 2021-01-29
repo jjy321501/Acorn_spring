@@ -9,16 +9,14 @@ import org.springframework.stereotype.Repository;
 import com.gura.spring05.cafe.dto.CafeDto;
 
 @Repository
-public class CafeDaoImpl implements CafeDao {
-	//핵심의존객체 DI
+public class CafeDaoImpl implements CafeDao{
+	//핵심 의존객체 DI
 	@Autowired
 	private SqlSession session;
 	
 	@Override
 	public void insert(CafeDto dto) {
-		
-		session.insert("cafe.insert",dto);
-		
+		session.insert("cafe.insert", dto);
 	}
 
 	@Override
@@ -35,8 +33,7 @@ public class CafeDaoImpl implements CafeDao {
 
 	@Override
 	public CafeDto getData(int num) {
-		CafeDto dto=session.selectOne("cafe.getData",num);
-		
+		CafeDto dto=session.selectOne("cafe.getData", num);
 		return dto;
 	}
 

@@ -3,8 +3,9 @@
 <mapper namespace="cafe">
 	<insert id="insert" parameterType="cafeDto">
 		INSERT INTO board_cafe
-		(num,writer,title,content,viewCount,regdate)
-		VALUES(board_cafe_seq.NEXTVAL,#{writer},#{title},#{content},#{viewCount},SYSDATE)
+		(num, writer, title, content, viewCount, regdate)
+		VALUES(board_cafe_seq.NEXTVAL, #{writer}, 
+			#{title}, #{content}, 0, SYSDATE)
 	</insert>
 	<select id="getData" parameterType="int" resultType="cafeDto">
 		SELECT num,writer,title,content,viewCount,regdate
