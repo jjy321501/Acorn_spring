@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -113,8 +114,17 @@ public class CafeServiceImpl implements CafeService{
 		mView.addObject("totalRow", totalRow);
 	}
 
-}
+	@Override
+	public void getDetail(int num, ModelAndView mView) {
+		//글번호를 이용해서 글정보를 얻어오고 
+		CafeDto dto=cafeDao.getData(num);
+		//글정보를 ModelAndView 객체에 담고
+		mView.addObject("dto", dto);
+		//글 조회수를 증가 시킨다.
+		cafeDao.addViewCount(num);
+	}
 
+}
 
 
 
