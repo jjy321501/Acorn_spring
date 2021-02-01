@@ -4,13 +4,12 @@ public class CafeCommentDto {
 	private int num;
 	private String writer;
 	private String content;
-	private String target_id;
-	private int ref_group;
-	private int comment_group;
-	private String deleted;
+	private String target_id; //댓글 대상자
+	private int ref_group; //원글의 글번호
+	private int comment_group; //댓글 내에서의 그룹번호
+	private String deleted; //삭제된 댓글인지 여부 "yes" or "no"
 	private String regdate;
-	private String profile;
-	
+	private String profile; //프로필 이미지 경로
 	//디폴트 생성자
 	public CafeCommentDto() {}
 	public CafeCommentDto(int num, String writer, String content, String target_id, int ref_group, int comment_group,
@@ -80,6 +79,5 @@ public class CafeCommentDto {
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
-	
 	
 }

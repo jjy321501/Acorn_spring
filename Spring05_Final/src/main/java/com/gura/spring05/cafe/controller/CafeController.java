@@ -19,7 +19,13 @@ public class CafeController {
 	//의존객체 DI
 	@Autowired
 	private CafeService service;
-	
+	@RequestMapping("/cafe/private/comment_delete")
+	public ModelAndView commentDelete(HttpServletRequest request,
+			ModelAndView mView, @RequestParam int ref_group) {
+		service.deleteComment(request);
+		mView.setViewName("redirect:/cafe/detail.do?num="+ref_group);
+		return mView;
+	}
 	//새 댓글 저장 요청 처리
 	@RequestMapping(value = "/cafe/private/comment_insert", 
 			method = RequestMethod.POST)
