@@ -20,13 +20,23 @@ public class CafeController {
 	@Autowired
 	private CafeService service;
 	
-	//글 삭제 요청 처리
+	//새 댓글 저장 요청 처리
+	@RequestMapping(value = "/cafe/private/comment_insert", 
+			method = RequestMethod.POST)
+	public String commentInsert(HttpServletRequest request,
+			@RequestParam int ref_group) {
+		//새 댓글을 저장하고
+		service.saveComment(request);
+		//글 자세히 보기로 다시 리다일렉트 이동 시킨다.
+		//ref_group 은 자세히 보기 했던 글번호 
+		return "redirect:/cafe/detail.do?num="+ref_group;
+	}
+	
 	@RequestMapping("/cafe/private/delete")
 	public String delete(@RequestParam int num) {
 		service.deleteContent(num);
 		return "cafe/private/delete";
 	}
-	
 	@RequestMapping("/cafe/private/updateform")
 	public ModelAndView updateform(@RequestParam int num,
 			ModelAndView mView) {
@@ -40,7 +50,6 @@ public class CafeController {
 		return "cafe/private/update";
 	}
 	
-	//글 자세히 요청 처리
 	@RequestMapping("/cafe/detail")
 	public ModelAndView detail(@RequestParam int num, ModelAndView mView) {
 		//자세히 보여줄 글번호가 파라미터로 넘어온다.
