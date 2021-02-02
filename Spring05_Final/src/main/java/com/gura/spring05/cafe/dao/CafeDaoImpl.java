@@ -22,18 +22,16 @@ public class CafeDaoImpl implements CafeDao{
 
 	@Override
 	public void update(CafeDto dto) {
-		session.update("cafe.update",dto);
-		
+		session.update("cafe.update", dto);
 	}
 
 	@Override
 	public void delete(int num) {
-		//삭제된 row 의 갯수 얻어낸다
-		int count=session.delete("cafe.delete",num);
-		if(count==0) {//0이면 삭제실패
-			throw new DBFailException(num+"번 글 삭제 실패");
+		//삭제된 row 의 갯수를 얻어낸다 
+		int count=session.delete("cafe.delete", num);
+		if(count==0) {//0 이면 삭제 실패이다.
+			throw new DBFailException(num+" 번 글을 삭제 할수가 없습니다.");
 		}
-		
 	}
 
 	@Override
@@ -78,7 +76,6 @@ public class CafeDaoImpl implements CafeDao{
 	}
 
 }
-
 
 
 

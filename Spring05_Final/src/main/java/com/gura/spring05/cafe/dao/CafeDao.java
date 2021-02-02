@@ -1,3 +1,4 @@
+  
 package com.gura.spring05.cafe.dao;
 
 import java.util.List;
@@ -20,5 +21,6 @@ public interface CafeDao {
 	//글 조회수 올리기
 	public void addViewCount(int num);
 }
+
 
 
