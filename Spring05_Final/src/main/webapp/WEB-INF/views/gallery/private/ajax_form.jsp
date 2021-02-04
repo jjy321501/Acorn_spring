@@ -45,6 +45,7 @@
 	
 	//이미지를 선택하면 강제로 폼 전송 시키기
 	$("#image").on("change", function(){
+		//id가 ajaxForm 인 form 을 강제 submit
 		$("#ajaxForm").submit();
 	});
 	

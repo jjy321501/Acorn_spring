@@ -1,4 +1,3 @@
-  
 package com.gura.spring05.gallery.service;
 
 import javax.servlet.http.HttpServletRequest;
