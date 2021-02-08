@@ -1,7 +1,12 @@
 package com.gura.spring05.users.dao;
 
+import java.beans.Encoder;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Repository;
 
 import com.gura.spring05.users.dto.UsersDto;
@@ -88,22 +93,6 @@ public class UsersDaoImpl implements UsersDao{
 	}
 
 	@Override
-	public boolean isValid(UsersDto dto) {
-		/*
-		 *  mapper namespace => users
-		 *  sql id => isValid
-		 *  parameterType => UsersDto
-		 *  resultType => String
-		 */
-		String id=session.selectOne("users.isValid", dto);
-		if(id==null) { //잘못된 아이디와 비밀번호
-			return false;
-		}else {//유효한 아이디와 비밀번호 
-			return true;
-		}
-	}
-
-	@Override
 	public void insert(UsersDto dto) {
 		/*
 		 *  mapper namespace => users
@@ -111,6 +100,12 @@ public class UsersDaoImpl implements UsersDao{
 		 *  parameterType => UsersDto
 		 */
 		session.insert("users.insert", dto);
+	}
+
+	@Override
+	public String getPwd(String id) {
+		String pwd=session.selectOne("users.getPwd",id);
+		return pwd;
 	}
 
 }
